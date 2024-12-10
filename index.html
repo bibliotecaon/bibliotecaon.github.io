@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca online</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="/script/index.js" defer></script>
+</head>
+<body>
+
+    <header>
+
+        <img src="img/logo.png" alt="logo.png" id="logo">
+
+        <nav id="pc">
+            <a href="#" class="botao-cliente">Clientes</a>
+            <a href="#">Empréstimos</a>
+            <a href="#">Livros</a>
+        </nav>
+
+        <div id="button-hamburguer">
+            <img src="img/hamburguer.png" width="100%" height="100%">
+        </div>
+
+    </header>
+
+    <nav id="mob">
+        <a href="#" class="botao-cliente">Clientes</a>
+        <a href="#">Empréstimos</a>
+        <a href="#">Livros</a>
+    </nav>
+
+    <main>
+        <h1 id="tituloPrincipal">Biblioteca<br>Online</h1>
+
+        <section id="infoClientes">
+            <h2 id="TituloInfoClientes">Tabela de clientes</h2>
+            <table id="tabelaClientes">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Livros Emprestados</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>João Silva</td>
+                        <td>123.456.789-00</td>
+                        <td>O Pequeno Príncipe</td>
+                    </tr>
+                    <tr>
+                        <td>Maria Oliveira</td>
+                        <td>987.654.321-11</td>
+                        <td>A Revolução dos Bichos</td>
+                    </tr>
+                    <tr>
+                        <td>Pedro Santos</td>
+                        <td>456.789.123-22</td>
+                        <td>Dom Quixote</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="FiltrarClientes">
+                <input type="text" placeholder="CPF">
+                <input type="button" value="Filtrar">
+            </div>
+
+        </section>
+
+        <section id="registrarCliente">
+            <h2 id="tituloRegistroCliente">Registrar cliente</h2>
+
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="nomeCliente" placeholder="Nome">
+            <label for="cpf">CPF:</label>
+            <input type="text" name="cpf" id="cpfCliente" placeholder="CPF">
+
+            <input type="button" value="Registrar">
+
+        </section>
+
+    </main>
+</body>
+</html>
