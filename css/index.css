@@ -1,0 +1,568 @@
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+body {
+    background-color: #FFFFFF;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+header {
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.39);
+    background-color: #1C1C1C;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 7px 3px inset rgba(255, 255, 255, 0.123);
+}
+
+#logo {
+    margin: 15px;
+    filter: drop-shadow(2px 2px 3px rgba(128, 128, 128, 0.452));
+}
+
+nav#pc {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-right: 20px;
+}
+
+nav#pc > a {
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 1px gray;
+}
+
+nav#pc > a:hover {
+    transition: 0.3s;
+    transform: scale(1.1);
+    color: #fdf8e4;
+}
+
+nav#mob {
+    display: none;
+    background-color: #333333d2;
+    gap: 20px;
+    padding: 10px 0px;
+    flex-direction: column;
+    transition: 0.5s;
+}
+
+nav#mob.aparecido {
+    display: flex;
+}
+
+nav#mob > a {
+    font-size: 1.8em;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    padding: 20px 0px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+nav#mob > a:hover {
+    background-color: #494949d2;
+}
+
+#button-hamburguer {
+    width: 65px;
+    display: none;
+    margin-right: 12px;
+    cursor: pointer; 
+    transition: 0.5s;
+}
+
+#button-hamburguer.clicado {
+    transform: rotate(-90deg);
+}
+
+main {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+h1#tituloPrincipal {
+    color: #333333;
+    text-align: center;
+}
+
+/*INICIO das configurações de cliente*/
+
+section#infoClientes {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+#TituloInfoClientes {
+    text-shadow: 1px 1px 3px rgba(34, 34, 34, 0.267);
+    color: #333333;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+table#tabelaClientes {
+    transition: 0.3s;
+    margin: 10px auto;
+    border-collapse: collapse;
+    background-color: #d8d8d8;
+    font-family: monospace;
+}
+
+thead > tr {
+    background-color: #3b3b3b;
+}
+thead > tr > th {
+    border: 1px solid black;
+    text-shadow: 1px 1px 2px #fdf8e434;
+    color: white;
+}
+tbody {
+    border: solid 1px black;
+}
+tbody > tr {
+    border: solid 1px black;
+}
+tbody > tr > td {
+    border: 1px solid black;
+    text-shadow: 1px 1px 2px rgb(148, 148, 148);
+    text-align: center;
+}
+
+input {
+    border-radius: 5px;
+}
+
+div#FiltrarClientes {
+    gap: 20px;
+    width: auto;
+    justify-content: center;
+    display: flex;
+}
+
+div#FiltrarClientes > input[type='button'] {
+    border-radius: 10px;
+    transition:0.3s;
+    padding: 5px;
+}
+div#FiltrarClientes > input[type='button']:hover {
+    background-color: #d3d3d3;
+    transform: translateY(-4px);
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.288)
+}
+div#FiltrarClientes > input[type='button']:active {
+    background-color: #e5fdff;
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+section#registrarCliente {
+    border-radius: 20px;
+    margin: 30px auto;
+    background-color: #e4e4e4;
+    padding: 15px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+section#registrarCliente:hover {
+    transform: translateY(-5px);
+    box-shadow: 3px 4px 3px rgba(0, 0, 0, 0.103);
+}
+
+h2#tituloRegistroCliente {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    text-shadow: 1px 2px 3px #33333369;
+}
+
+section#registrarCliente > input {
+    width: 50%;
+    margin-bottom: 20px;
+}
+section#registrarCliente > input[type='button'] {
+    margin-top: 15px;
+    width: auto;
+    border-radius: 10px;
+    transition: 0.3s;
+    padding: 5px;
+}
+section#registrarCliente > input[type='button']:hover {
+    background-color: #d3d3d3;
+    transform: translateY(-4px);
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.288)
+}
+section#registrarCliente > input[type='button']:active {
+    background-color: #e5fdff;
+    transform: translateY(0);
+    box-shadow: none;
+}
+section#registrarCliente > label {
+    font-family: monospace;
+}
+/*FIM das configurações de cliente*/
+
+/*INICIO das configurações de livro*/
+
+section#lista-livros {
+    display: none;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eae7dc;
+    padding: 15px;
+    transition: 0.3s;
+    margin-bottom: 25px;
+}
+
+section#lista-livros:hover {
+    transform: translateY(-5px);
+    box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.164);
+}
+
+section#lista-livros > h2 {
+    text-align: center;
+    color: #3e2723;
+}
+
+.livro {
+    width: 60%;
+    text-align: center;
+    color: #3e2723;
+    border-radius: 7px;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 15px auto;
+    background-color: #d8c3a5;
+}
+
+section#cadastro-livro {
+    display: none;
+    text-align: center;
+    align-items: center;
+    background-color: #d0e2d9;
+    padding: 9px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+section#cadastro-livro:hover {
+    transform: translateY(-5px);
+    box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.164);
+}
+
+section#cadastro-livro > h2 {
+    color: #3e4e4e;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+article#form-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+article#form-cadastro > input[type='button'] {
+    width: auto;
+    margin: auto;
+}
+
+#delete-book-div {
+    display: none;
+    margin: 25px 0px;
+    background-color: #eae7dc;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: 0.3s;
+}
+
+#delete-book-div:hover {
+    transform: translateY(-5px);
+    box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.164);
+}
+
+#delete-book-div > h2 {
+    color: #3e2723;
+    margin-bottom: 20px;
+}
+
+#delete-book-div > input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#delete-book-div > button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a6c61; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#delete-book-div > button:hover {
+    background-color: #3b4d42;
+}
+
+/*FIM das configurações de livro*/
+
+/*FOOTER*/
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #1C1C1C;
+    padding: 10px;
+    margin-top: auto; /* Isso faz o footer ir para o final */
+}
+
+footer > p > a {
+    color: white;
+    text-decoration: none;
+}
+
+footer > p > a:hover {
+    color: rgb(219, 219, 219);
+    text-decoration: underline;
+}
+
+footer > p {
+    margin: 10px;
+    color: white;
+}
+
+/*media*/
+
+/*Celular*/
+@media(max-width:500px) {
+    #logo {
+        width: 75px;
+    }
+    #button-hamburguer {
+        display: block;
+    }
+    nav#pc {
+        display: none;
+    }
+    h1#tituloPrincipal {
+        font-size: 3em;
+    }
+
+    /*INICIO configs cliente*/
+    section#registrarCliente, table#tabelaClientes {
+        width: 85%;
+    }
+    #TituloInfoClientes {
+        font-size: 2.2em;   
+    }
+    tbody > tr > td, thead > tr > th {
+        font-size: 1.1em;
+    }
+    #FiltrarClientes > input[type='text'] {
+        width: 60%;
+    }
+    h2#tituloRegistroCliente {
+        font-size: 1.7em;
+    }
+    section#registrarCliente > input[type='text'] {
+        height: 22px;
+    }
+    section#registrarCliente > label {
+        font-size: 1.6em;
+    }
+    /*Fim configs cliente*/
+
+    /*INICIO configs Livro*/
+    #delete-book-div, section#cadastro-livro, section#lista-livros {
+        width: 80%;
+    }
+    /*FIM configs Livro*/
+
+    /*INICIO configs Footer*/
+    footer > p {
+        font-size: 1.4em;
+    }
+    /*FIM configs Footer*/
+
+}
+
+/*Tablet*/
+@media(min-width:501px) and (max-width:750px) {
+    #logo {
+        width: 85px;
+    }
+    #button-hamburguer {
+        display: block;
+    }
+    nav#pc {
+        display: none;
+    }
+    h1#tituloPrincipal {
+        font-size: 3.2em;
+    }
+    /*INICIO configs cliente*/
+    section#registrarCliente, table#tabelaClientes {
+        width: 80%;
+    }
+    #TituloInfoClientes {
+        font-size: 2.4em;   
+    }
+    tbody > tr > td, thead > tr > th {
+        font-size: 1.4em;
+    }
+    #FiltrarClientes > input[type='text'] {
+        width: 50%;
+    }
+    h2#tituloRegistroCliente {
+        font-size: 1.9em;
+    }
+    section#registrarCliente > input[type='text'] {
+        height: 24px;
+    }
+    section#registrarCliente > label {
+        font-size: 1.8em;
+    }
+    /*FIM configs cliente*/
+
+    /*INICIO configs Livro*/
+    #delete-book-div, section#cadastro-livro, section#lista-livros {
+        width: 75%;
+    }
+    /*FIM configs Livro*/
+
+    /*INICIO configs Footer*/
+    footer > p {
+        font-size: 1.6em;
+    }
+    /*FIM configs Footer*/
+
+}
+
+/*Desktop menor*/
+@media(min-width:751px) and (max-width:1290px) {
+    #logo {
+        width: 95px;
+    }
+    h1#tituloPrincipal {
+        font-size: 4.2em;
+    }
+    nav#pc {
+        gap:40px;
+    }
+    nav#pc > a {
+        font-size: 2.1em;
+    }
+    /*INICIO configs cliente*/
+    section#registrarCliente, table#tabelaClientes {
+        width: 80%;
+    }
+    #TituloInfoClientes {
+        font-size: 2.7em;   
+    }
+    tbody > tr > td, thead > tr > th {
+        font-size: 1.6em;
+    }
+    #FiltrarClientes > input[type='text'] {
+        width: 33%;
+    }
+    h2#tituloRegistroCliente {
+        font-size: 2.3em;
+    }
+    section#registrarCliente > input[type='text'] {
+        height: 28px;
+    }
+    section#registrarCliente > label {
+        font-size: 2em;
+    }
+    /*FIM configs cliente*/
+
+    /*INICIO configs Livro*/
+    #delete-book-div, section#cadastro-livro, section#lista-livros {
+        width: 60%;
+    }
+    /*FIM configs Livro*/
+
+    /*INICIO configs Footer*/
+    footer > p {
+        font-size: 1.8em;
+    }
+    /*FIM configs Footer*/
+
+}
+
+/*Desktop maior*/
+@media(min-width:1291px){
+    #logo {
+        width: 105px;
+    }
+    h1#tituloPrincipal {
+        font-size: 5em;
+    }
+    nav#pc {
+        gap: 50px;
+    }
+    nav#pc > a {
+        font-size: 2.4em;
+    }
+    /*INICIO configs cliente*/
+    section#registrarCliente, table#tabelaClientes {
+        width: 55%;
+    }
+    #TituloInfoClientes {
+        font-size: 3em;   
+    }
+    tbody > tr > td, thead > tr > th {
+        font-size: 1.8em;
+    }
+    #FiltrarClientes > input[type='text'] {
+        width: 40%;
+    }
+    h2#tituloRegistroCliente {
+        font-size: 2.5em;
+    }
+    section#registrarCliente > input[type='text'] {
+        height: 32px;
+    }
+    section#registrarCliente > label {
+        font-size: 2.2em;
+    }
+    /*FIM configs cliente*/
+
+    /*INICIO configs Livro*/
+    #delete-book-div, section#cadastro-livro, section#lista-livros {
+        width: 50%;
+    }
+    /*FIM configs Livro*/
+
+    /*INICIO configs Footer*/
+    footer > p {
+        font-size: 2em;
+    }
+    /*FIM configs Footer*/
+    
+}
+
