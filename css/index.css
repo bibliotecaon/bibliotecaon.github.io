@@ -6,7 +6,7 @@ html, body {
 }
 
 body {
-    background-color: #FFFFFF;
+    background-color: #f0f0f0;
     height: 100%;
     overflow-x: hidden;
 }
@@ -242,6 +242,10 @@ section#lista-livros > h2 {
     color: #3e2723;
 }
 
+#container-livros {
+    text-align: center;
+}
+
 .livro {
     width: 60%;
     text-align: center;
@@ -297,6 +301,11 @@ article#form-cadastro > input[type='button']:active {
     transform: translateY(0);
     box-shadow: none;
 }
+article#form-cadastro > #respostaCadastroLivro {
+    font-size: 1.5em;
+    display: none;
+    font-family: monospace;
+}
 
 #delete-book-div {
     display: none;
@@ -326,6 +335,11 @@ article#form-cadastro > input[type='button']:active {
     border: none;
     border-radius: 5px;
     font-size: 16px;
+}
+
+#delete-book-div > #respostaDeletarLivro {
+    font-size: 1.3em;
+    font-family: monospace;
 }
 
 #delete-book-div > button {

@@ -30,7 +30,7 @@
     <!-- Nav mobile -->
     <nav id="mob">
         <a href="#" class="botao-cliente">Clientes</a>
-        <a href="#" class="botao-cliente">Empréstimos</a>
+        <a href="#" class="botao-emprestimo">Empréstimos</a>
         <a href="#" class="botao-livro">Livros</a>
     </nav>
 
@@ -118,7 +118,9 @@
                     <input type="text" id="autor" name="autor" placeholder="autor">
                 </div>
 
-                <input type="button" value="Cadastrar">
+                <p id="respostaCadastroLivro"></p>
+
+                <input type="button" value="Cadastrar" id="botaoCadastroLivro">
 
             </article>
 
@@ -128,7 +130,8 @@
         <div id="delete-book-div">
             <h2>Deletar Livro</h2>
             <input type="text" id="bookName" placeholder="Digite o nome do livro">
-            <button>Deletar</button>
+            <p id="respostaDeletarLivro"></p>
+            <button id="botaoDeletarLivro">Deletar</button>
         </div>
 
     <!-- Div para realizar empréstimo -->

@@ -66,10 +66,10 @@ export class Cliente {
 }
 
 export class Biblioteca {
-    constructor() {
-        this.livros = [];
-        this.usuarios = [];
-        this.emprestimos = [];
+    constructor(livros, usuarios, empresimos) {
+        this.livros = livros;
+        this.usuarios = usuarios;
+        this.emprestimos = empresimos;
     }
 
     adicionarLivro(livro) {
@@ -145,3 +145,9 @@ export class Emprestimo {
         Data: ${this.data}`;
     }
 }
+
+let livro = new Livro('biblia', 'vinicius')
+let livro2 = new Livro('adao e eva', 'carlos')
+let cliente = await Cliente.criar('Joao', '44727914808')
+let cliente2 = await Cliente.criar('Nicolas', '11783973862')
+let biblioteca = new Biblioteca()
