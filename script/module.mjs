@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 export async function verificaCPF(cpf) {
 
     if(!/^\d+$/.test(cpf.trim()) ) {
