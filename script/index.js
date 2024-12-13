@@ -3,6 +3,9 @@ if(!localStorage.getItem('armazenamento')) {
     localStorage.setItem('armazenamento', JSON.stringify(new Biblioteca([],[],[])))
 }
 
+let bibliotecaData = JSON.parse(localStorage.getItem('armazenamento'))
+let biblioteca = new Biblioteca(bibliotecaData.livros, bibliotecaData.usuarios, bibliotecaData.emprestimos)
+
 /*botao hamburguer*/
 let buttonHamburguer = document.getElementById('button-hamburguer')
 buttonHamburguer.addEventListener('click', function() {
@@ -17,14 +20,7 @@ buttonHamburguer.addEventListener('click', function() {
 
 /*volta pro menu principal*/
 document.getElementById('logo').addEventListener('click', () => {
-    document.getElementById('realizar-emprestimo').style.display = 'none';
-    document.getElementById('lista-emprestimos').style.display = 'none';
-    document.getElementById('delete-book-div').style.display = 'none';
-    document.getElementById('lista-livros').style.display = 'none';
-    document.getElementById('cadastro-livro').style.display = 'none';
-    document.getElementById('infoClientes').style.display = 'none';
-    document.getElementById('registrarCliente').style.display = 'none';
-    document.getElementById('mob').style.display = 'none';
+    location.reload()
 })
 
 /*mostrar funcionalidades do cliente*/
@@ -81,9 +77,6 @@ botoesEmprestimo.forEach(emprestimo => {
 
 /*funcionalidade de mostrar os livros cadastrados*/
 
-let bibliotecaData = JSON.parse(localStorage.getItem('armazenamento'))
-let biblioteca = new Biblioteca(bibliotecaData.livros, bibliotecaData.usuarios, bibliotecaData.emprestimos)
-
 function adicionarLivro(titulo, autor, disponivel) {
 
     let containerLivros = document.getElementById('container-livros');
@@ -109,7 +102,7 @@ biblioteca.livros.forEach(livro => {
     adicionarLivro(livro.titulo, livro.autor, livro.disponivel);
 });
 if(biblioteca.livros.length === 0) {
-    document.getElementById('container-livros').innerHTML = '<p>Nenhum livro Cadastrado</p>';
+    document.getElementById('container-livros').innerHTML = '<p c >Nenhum livro Cadastrado</p>';
 }
 
 /*funcionalidades dos emprestimos*/
@@ -200,9 +193,6 @@ function CadastrarLivro() {
 
         let livro = new Livro(titulo, autor)
 
-        let bibliotecaData = JSON.parse(localStorage.getItem('armazenamento'))
-        let biblioteca = new Biblioteca(bibliotecaData.livros, bibliotecaData.usuarios, bibliotecaData.emprestimos)
-
         /*verifica se o livro já está cadastrado*/
         biblioteca.livros.forEach((book) => {
             if(book.titulo === livro.titulo) {
@@ -242,9 +232,6 @@ function deletarLivro() {
             throw new Error('Preencha corretamente')
         }
 
-        let Data = JSON.parse(localStorage.getItem('armazenamento'))
-        let biblioteca = new Biblioteca(Data.livros, Data.usuarios, Data.emprestimos)
-
         if(!biblioteca.livros.find(livro => livro.titulo === tituloLivroDeletar)) {
             throw new Error('Livro não encontrado')
         }
@@ -273,3 +260,98 @@ function deletarLivro() {
     }
 }
 document.getElementById('botaoDeletarLivro').addEventListener('click', deletarLivro)
+/*FIM das funcionalidades livro*/
+
+/*INICIO das funcionalidades Cliente*/
+
+async function cadastrarCliente() {
+    try {
+        let nome = document.getElementById('nomeCliente').value
+        let cpf = document.getElementById('cpfCliente').value
+
+        if(!nome || !cpf) {
+            throw new Error('Campos Obrigatórios!')
+        }
+
+        let usuario = await Cliente.criar(nome, cpf)
+        biblioteca.registrarUsuario(usuario)
+
+        localStorage.setItem('armazenamento', JSON.stringify(biblioteca))
+
+        document.getElementById('respostaCadastroCliente').style.display = 'block'
+        document.getElementById('respostaCadastroCliente').innerHTML = 'Cadastrado com sucesso!';
+        document.getElementById('respostaCadastroCliente').style.color = 'green';
+
+    } catch(error) {
+        document.getElementById('respostaCadastroCliente').style.display = 'block'
+        document.getElementById('respostaCadastroCliente').innerHTML = error;
+        document.getElementById('respostaCadastroCliente').style.color = 'red';
+    }
+
+}
+document.getElementById('botaoRegistroCliente').addEventListener('click', cadastrarCliente)
+
+/*FUNCIONALIDADE de popular tabela clientes*/
+
+  // Referência ao corpo da tabela
+const tbody = document.querySelector('#tabelaClientes tbody');
+
+// Percorre o array e cria as linhas da tabela
+biblioteca.usuarios.forEach(cliente => {
+
+    const tr = document.createElement('tr'); // Cria uma nova linha
+
+    // Cria as células para cada propriedade do cliente
+    const tdNome = document.createElement('td');
+    tdNome.textContent = cliente.nome;
+
+    const tdCpf = document.createElement('td');
+    tdCpf.textContent = cliente.cpf;
+
+    const tdLivros = document.createElement('td');
+
+    tdLivros.textContent = tdLivros.textContent ? cliente.livrosEmprestados : '-'
+
+    // Adiciona as células à linha
+    tr.appendChild(tdNome);
+    tr.appendChild(tdCpf);
+    tr.appendChild(tdLivros);
+
+    // Adiciona a linha ao tbody
+    tbody.appendChild(tr);
+});
+
+/*Funcionalidade Filtrar Cliente*/
+
+document.getElementById('botaoFiltrarCliente').addEventListener('click', () => {
+    let cpfFiltrar = document.getElementById('cpfClienteFiltrar').value
+
+    const tbody = document.querySelector('#tabelaClientes tbody');
+    tbody.innerHTML = '';
+
+    let usuarioEncontrado = biblioteca.usuarios.find(usuario => usuario.cpf == cpfFiltrar)
+
+    if(usuarioEncontrado) {
+        document.getElementById('respostaFiltrarCliente').style.display = 'none';
+        const tr = document.createElement('tr'); // Cria uma nova linha
+        // Cria as células para cada propriedade do cliente
+        const tdNome = document.createElement('td');
+        tdNome.textContent = usuarioEncontrado.nome;
+        const tdCpf = document.createElement('td');
+        tdCpf.textContent = usuarioEncontrado.cpf;
+        const tdLivros = document.createElement('td');
+        tdLivros.textContent = tdLivros.textContent ? usuarioEncontrado.livrosEmprestados : '-'
+        // Adiciona as células à linha
+        tr.appendChild(tdNome);
+        tr.appendChild(tdCpf);
+        tr.appendChild(tdLivros);
+        // Adiciona a linha ao tbody
+        tbody.appendChild(tr);
+        return
+    }
+    document.getElementById('respostaFiltrarCliente').style.display = 'block';
+    document.getElementById('respostaFiltrarCliente').style.color = 'red';
+    document.getElementById('respostaFiltrarCliente').innerHTML = 'Usuário não encontrado!';
+})
+
+/*FIM das funcionalidades Cliente*/

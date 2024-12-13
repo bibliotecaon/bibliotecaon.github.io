@@ -156,6 +156,13 @@ div#FiltrarClientes {
     display: flex;
 }
 
+#respostaFiltrarCliente {
+    font-size: 1.2em;
+    font-family: monospace;
+    display: none;
+    text-align: center;
+}
+
 div#FiltrarClientes > input[type='button'] {
     border-radius: 10px;
     transition:0.3s;
@@ -192,6 +199,12 @@ h2#tituloRegistroCliente {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     text-shadow: 1px 2px 3px #33333369;
+}
+
+#respostaCadastroCliente {
+    display: none;
+    font-family: monospace;
+    font-size: 1.2em;
 }
 
 section#registrarCliente > input {

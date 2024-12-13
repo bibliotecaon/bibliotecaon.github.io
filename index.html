@@ -51,29 +51,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>João Silva</td>
-                        <td>123.456.789-00</td>
-                        <td>O Pequeno Príncipe</td>
-                    </tr>
-                    <tr>
-                        <td>Maria Oliveira</td>
-                        <td>987.654.321-11</td>
-                        <td>A Revolução dos Bichos</td>
-                    </tr>
-                    <tr>
-                        <td>Pedro Santos</td>
-                        <td>456.789.123-22</td>
-                        <td>Dom Quixote</td>
-                    </tr>
                 </tbody>
             </table>
 
             <!-- Barra de filtrar cliente por CPF -->
             <div id="FiltrarClientes">
-                <input type="text" placeholder="CPF">
-                <input type="button" value="Filtrar">
+                <input type="text" placeholder="CPF" id="cpfClienteFiltrar">
+                <input type="button" value="Filtrar" id="botaoFiltrarCliente">
             </div>
+            <p id="respostaFiltrarCliente"></p>
 
         </section>
 
@@ -86,7 +72,9 @@
             <label for="cpf">CPF:</label>
             <input type="text" name="cpf" id="cpfCliente" placeholder="CPF">
 
-            <input type="button" value="Registrar">
+            <p id="respostaCadastroCliente"></p>
+
+            <input type="button" value="Registrar" id="botaoRegistroCliente">
 
         </section>
         <!-- FIM funcionalidades Cliente -->

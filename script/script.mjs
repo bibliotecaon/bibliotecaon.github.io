@@ -18,11 +18,9 @@ export class Livro {
 
 export class Cliente {
 
-    #cpf
-
     constructor(nome, cpf) {
         this.nome = nome;
-        this.#cpf = cpf;
+        this.cpf = cpf;
         this.livrosEmprestados = [];
     }
 
@@ -48,19 +46,10 @@ export class Cliente {
         return 'Este livro não foi emprestado por você.'
     }
 
-    get_cpf() {
-        return this.#cpf
-    }
-
     static async criar(nome, cpf) {
         let cliente = new Cliente(nome, cpf)
-        try {
-            await verificaCPF(cpf)
-            return cliente;
-        } catch(error) {
-            console.log(error)
-            return 'Erro: CPF inválido.';
-        }
+        await verificaCPF(cpf)
+        return cliente;
     }
 
 }
@@ -93,11 +82,11 @@ export class Biblioteca {
     }
 
     registrarUsuario(novo_usuario) {
-        if(!this.usuarios.find(usuario => novo_usuario.get_cpf() === usuario.get_cpf())) {
+        if(!this.usuarios.find(usuario => novo_usuario.cpf === usuario.cpf)) {
             this.usuarios.push(novo_usuario)
             return 'Usuário registrado com sucesso!'
         }
-        return 'Usuário já registrado!'
+        throw new Error('Usuário já está cadastrado!')
     }
 
     emprestarLivro(livro, cliente) {
@@ -106,7 +95,7 @@ export class Biblioteca {
             return 'Este livro já está emprestado'
         }
 
-        if(this.usuarios.find(usuario => usuario.get_cpf() === cliente.get_cpf())) {
+        if(this.usuarios.find(usuario => usuario.cpf === cliente.cpf)) {
 
             let novoEmprestimo = new Emprestimo(cliente, livro);
 
@@ -118,7 +107,7 @@ export class Biblioteca {
     }
 
     fecharEmprestimo(livro, cliente) {
-        let emprestimo = this.emprestimos.find(emprestimo => cliente.get_cpf() === emprestimo.cliente.get_cpf() && livro.titulo === emprestimo.livro.titulo);
+        let emprestimo = this.emprestimos.find(emprestimo => cliente.cpf() === emprestimo.cliente.cpf() && livro.titulo === emprestimo.livro.titulo);
         let indice = this.emprestimos.indexOf(emprestimo);
         if(indice != -1) {
             this.emprestimos.splice(indice, 1)
@@ -139,7 +128,7 @@ export class Emprestimo {
     getInfo() {
         return `
         Cliente: ${this.cliente.nome}
-        CPF: ${this.cliente.get_cpf()}
+        CPF: ${this.cliente.cpf}
         Livro: ${this.livro.titulo}
         Autor: ${this.livro.autor}
         Data: ${this.data}`;
