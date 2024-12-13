@@ -309,6 +309,11 @@ function deletarLivro() {
 
         biblioteca.livros.forEach((livro) => {
             if(livro.titulo === tituloLivroDeletar) {
+
+                if(!livro.disponivel) {
+                    throw new Error('Não pode deletar livro emprestado')
+                }
+
                 biblioteca.removerLivro(livro)
                 localStorage.setItem('armazenamento', JSON.stringify(biblioteca))
 
