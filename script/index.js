@@ -189,6 +189,10 @@ function atualizarListaEmprestimos() {
         livroP.textContent = `Livro: ${emprestimo.livro.titulo}`;
         divEmprestimo.appendChild(livroP);
 
+        const dataP = document.createElement('p');
+        livroP.textContent = `Data: ${emprestimo.data}`;
+        divEmprestimo.appendChild(dataP);
+
         const finalizarBtn = document.createElement('button');
         finalizarBtn.textContent = 'Finalizar Empréstimo';
         finalizarBtn.classList.add('btn-finalizar');
