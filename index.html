@@ -51,7 +51,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                </tbody>
             </table>
 
             <!-- Barra de filtrar cliente por CPF -->
@@ -128,7 +127,7 @@
 
         <div class="campoEmprestimo">
             <label for="clienteEmprestimo">CPF Cliente:</label>
-            <input type="text" id="clienteEmprestimo" placeholder="CPF do cliente">
+            <input type="text" id="cpfEmprestimo" placeholder="CPF do cliente">
         </div>
 
         <div class="campoEmprestimo">
@@ -136,7 +135,9 @@
             <input type="text" id="livroEmprestimo" placeholder="Título do livro">
         </div>
 
-        <input type="button" value="Emprestar">
+        <input type="button" value="Emprestar" id="botaoRealizarEmprestimo">
+
+        <p id="respostaRealizarEmprestimo"></p>
 
     </section>
 

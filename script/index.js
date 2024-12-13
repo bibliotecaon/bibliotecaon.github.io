@@ -107,22 +107,67 @@ if(biblioteca.livros.length === 0) {
 
 /*funcionalidades dos emprestimos*/
 // Array para armazenar os empréstimos
-const emprestimos = [
-    { cliente: "João Silva", livro: "O Pequeno Príncipe" },
-    { cliente: "Maria Oliveira", livro: "A Revolução dos Bichos" },
-    { cliente: "Pedro Santos", livro: "Dom Quixote" }
-];
 
 // Função para adicionar um empréstimo
-function adicionarEmprestimo(cliente, livro) {
-    if (cliente && livro) {
-        const novoEmprestimo = { cliente, livro };
-        emprestimos.push(novoEmprestimo);
+function adicionarEmprestimo() {
+
+    try {
+        
+        let cpfcliente = document.getElementById('cpfEmprestimo').value
+        let tituloLivro = document.getElementById('livroEmprestimo').value
+
+        if (!cpfcliente || !tituloLivro) {
+            throw new Error('Campos Obrigatórios!')
+        } 
+
+        if(!biblioteca.usuarios.find(usuario => usuario.cpf === cpfcliente)) {
+            throw new Error('Usuario não encontrado!')
+        }
+
+        if(!biblioteca.livros.find(book => book.titulo === tituloLivro)) {
+            throw new Error('Livro não encontrado!')
+        }
+
+        let clienteEncontrado = biblioteca.usuarios.find(usuario => usuario.cpf === cpfcliente);
+        let cliente = new Cliente(clienteEncontrado.nome, clienteEncontrado.cpf)
+
+        let livroEncontrado = biblioteca.livros.find(book => book.titulo === tituloLivro);
+        let livro = new Livro(livroEncontrado.titulo, livroEncontrado.autor)
+
+        if (!livro.disponivel) {
+            throw new Error('Este livro está alugado!')
+        }
+
+        const novoEmprestimo = new Emprestimo(cliente, livro);
+        biblioteca.emprestarLivro(novoEmprestimo.livro, novoEmprestimo.cliente)
+
+        biblioteca.usuarios.forEach((usuario) => {
+            if(cliente.cpf === usuario.cpf) {
+                usuario.livrosEmprestados.push(livro);
+            }
+        })
+
+        biblioteca.livros.forEach((book) => {
+            if(book.titulo === livro.titulo) {
+                book.disponivel = false;
+            }
+        })
+
+        localStorage.setItem('armazenamento', JSON.stringify(biblioteca))
+
+        document.getElementById('respostaRealizarEmprestimo').style.color = 'green';
+        document.getElementById('respostaRealizarEmprestimo').innerHTML = 'Emprestimo realizado!';
+        document.getElementById('respostaRealizarEmprestimo').style.display = 'block';
+
         atualizarListaEmprestimos();
-    } else {
-        alert("Por favor, preencha os campos de cliente e livro.");
+
+    } catch(error) {
+        document.getElementById('respostaRealizarEmprestimo').style.color = 'red';
+        document.getElementById('respostaRealizarEmprestimo').innerHTML = error;
+        document.getElementById('respostaRealizarEmprestimo').style.display = 'block';
     }
 }
+document.getElementById('botaoRealizarEmprestimo').addEventListener('click', adicionarEmprestimo)
 
 // Função para atualizar a lista de empréstimos na interface
 function atualizarListaEmprestimos() {
@@ -132,50 +177,41 @@ function atualizarListaEmprestimos() {
     container.innerHTML = '';
 
     // Adiciona cada empréstimo
-    emprestimos.forEach((emprestimo, index) => {
+    biblioteca.emprestimos.forEach((emprestimo) => {
         const divEmprestimo = document.createElement('div');
         divEmprestimo.classList.add('emprestimo-item');
 
         const clienteP = document.createElement('p');
-        clienteP.textContent = `Cliente: ${emprestimo.cliente}`;
+        clienteP.textContent = `Cliente: ${emprestimo.cliente.nome}`;
         divEmprestimo.appendChild(clienteP);
 
         const livroP = document.createElement('p');
-        livroP.textContent = `Livro: ${emprestimo.livro}`;
+        livroP.textContent = `Livro: ${emprestimo.livro.titulo}`;
         divEmprestimo.appendChild(livroP);
 
         const finalizarBtn = document.createElement('button');
         finalizarBtn.textContent = 'Finalizar Empréstimo';
         finalizarBtn.classList.add('btn-finalizar');
-        finalizarBtn.onclick = () => finalizarEmprestimo(index);
+        finalizarBtn.onclick = () => finalizarEmprestimo(emprestimo.livro, emprestimo.cliente)
         divEmprestimo.appendChild(finalizarBtn);
 
         container.appendChild(divEmprestimo);
     });
 }
+atualizarListaEmprestimos()
 
 // Função para finalizar um empréstimo
-function finalizarEmprestimo(index) {
-    emprestimos.splice(index, 1); // Remove o empréstimo do array
+function finalizarEmprestimo(livro, cliente) {
+
+    let instanciaLivro = new Livro(livro.titulo, livro.autor)
+    let instanciaCliente = new Cliente(cliente.nome, cliente.cpf)
+
+    biblioteca.fecharEmprestimo(instanciaLivro, instanciaCliente);
+
+    localStorage.setItem('armazenamento', JSON.stringify(biblioteca))
+
     atualizarListaEmprestimos(); // Atualiza a interface
 }
-
-// Lógica para capturar o clique do botão de adicionar empréstimo
-document.addEventListener('DOMContentLoaded', () => {
-    // Preenche a lista com os empréstimos iniciais
-    atualizarListaEmprestimos();
-
-    document.querySelector('#realizar-emprestimo input[type="button"]').addEventListener('click', () => {
-        const cliente = document.getElementById('clienteEmprestimo').value;
-        const livro = document.getElementById('livroEmprestimo').value;
-
-        adicionarEmprestimo(cliente, livro);
-
-        // Limpa os campos após adicionar
-        document.getElementById('clienteEmprestimo').value = '';
-        document.getElementById('livroEmprestimo').value = '';
-    });
-});
 
 /*-------------------------------------------------------------*
 /*INICIO DAS FUNCIONALIDADES LIVRO*/
@@ -326,12 +362,12 @@ biblioteca.usuarios.forEach(cliente => {
 document.getElementById('botaoFiltrarCliente').addEventListener('click', () => {
     let cpfFiltrar = document.getElementById('cpfClienteFiltrar').value
 
-    const tbody = document.querySelector('#tabelaClientes tbody');
-    tbody.innerHTML = '';
+    const tbody = document.querySelector('#tabelaClientes tbody');;
 
     let usuarioEncontrado = biblioteca.usuarios.find(usuario => usuario.cpf == cpfFiltrar)
 
     if(usuarioEncontrado) {
+        tbody.innerHTML = ''
         document.getElementById('respostaFiltrarCliente').style.display = 'none';
         const tr = document.createElement('tr'); // Cria uma nova linha
         // Cria as células para cada propriedade do cliente
@@ -351,7 +387,7 @@ document.getElementById('botaoFiltrarCliente').addEventListener('click', () => {
     }
     document.getElementById('respostaFiltrarCliente').style.display = 'block';
     document.getElementById('respostaFiltrarCliente').style.color = 'red';
-    document.getElementById('respostaFiltrarCliente').innerHTML = 'Usuário não encontrado!';
+    document.getElementById('respostaFiltrarCliente').innerHTML = 'Usuário não encontrado';
 })
 
 /*FIM das funcionalidades Cliente*/

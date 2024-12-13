@@ -101,13 +101,13 @@ export class Biblioteca {
 
             this.emprestimos.push(novoEmprestimo)
             cliente.pegarLivro(livro)
-            return 'Livro emprestado com sucesso!'
+            return 'Livro Emprestado com sucesso!'
         } 
         return 'Usuário não cadastrado!'
     }
 
     fecharEmprestimo(livro, cliente) {
-        let emprestimo = this.emprestimos.find(emprestimo => cliente.cpf() === emprestimo.cliente.cpf() && livro.titulo === emprestimo.livro.titulo);
+        let emprestimo = this.emprestimos.find(emprestimo => cliente.cpf === emprestimo.cliente.cpf && livro.titulo === emprestimo.livro.titulo);
         let indice = this.emprestimos.indexOf(emprestimo);
         if(indice != -1) {
             this.emprestimos.splice(indice, 1)

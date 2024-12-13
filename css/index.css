@@ -390,6 +390,13 @@ article#form-cadastro > #respostaCadastroLivro {
     transform: translateY(-5px);
     box-shadow: 3px 4px 3px rgba(0, 0, 0, 0.137);
 }
+
+#respostaRerespostaRealizarEmprestimo {
+    display: none;
+    font-family: monospace;
+    font-size: 1.2em;
+}
+
 .campoEmprestimo {
     margin: 10px auto;
     display: flex;
@@ -401,7 +408,7 @@ article#form-cadastro > #respostaCadastroLivro {
     padding: 25px;
     margin: 32px auto;
     text-align: center;
-    background-color: #F2E8D5;
+    background-color: #f1e4cb;
     transition: 0.3s;
 }
 #lista-emprestimos:hover {
