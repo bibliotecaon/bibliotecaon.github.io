@@ -104,7 +104,7 @@ function adicionarLivro(titulo, autor, disponivel) {
         novoLivro.innerHTML = `
         <p class="dado-livro"><strong>Título:</strong> <span>${titulo}</span></p>
         <p class="dado-livro"><strong>Autor:</strong> <span>${autor}</span></p>
-        <p class="dado-livro"><strong>Autor:</strong> <span style="color:red">Não</span></p>
+        <p class="dado-livro"><strong>Disponível:</strong> <span style="color:red">Não</span></p>
     `;
     }
     containerLivros.appendChild(novoLivro);
