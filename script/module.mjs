@@ -4,7 +4,7 @@ export async function verificaCPF(cpf) {
         throw new Error('CPF inválido!')
     }
 
-    let token = '16546|YYjVaZk2tUc5if8d4FOMFep0B5GBTNHB';
+    let token = '17212|TaoR9gzrxCilnVJaMgsbZSGUJIdWZUj2';
     let url = `https://api.invertexto.com/v1/validator?token=${token}&type=cpf&value=${cpf}`;
 
     let api = await fetch(url, {
