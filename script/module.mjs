@@ -1,10 +1,10 @@
 export async function verificaCPF(cpf) {
 
-    if(!/^\d+$/.test(cpf.trim()) ) {
+    if(!/^\d+$/.test(cpf.trim()) || cpf.length !== 11) {
         throw new Error('CPF inválido!')
     }
 
-    let token = '17214|fFszoUV77Ri3jx2R9kxpsEcxWfXMRJrL';
+    let token = '17215|zfWomxi1zKfcFuCwDp0Dsu1kdmNR9Zlf';
     let url = `https://api.invertexto.com/v1/validator?token=${token}&type=cpf&value=${cpf}`;
 
     let api = await fetch(url, {
@@ -23,4 +23,5 @@ export async function verificaCPF(cpf) {
     } 
     let responseError = await api.json();
     console.log(responseError)
+    throw new Error('Erro desconhecido!')
 }
